@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "image": "/images/employees/emp1.png",
+    "age": 28,
+    "gender": "หญิง",
+    "department": "บัญชี"
+  },
+  {
+    "id": 2,
+    "name": "Beth Smith",
+    "image": "/images/employees/emp2.png",
+    "age": 28,
+    "gender": "หญิง",
+    "department": "บัญชี"
+  },
+  {
+    "id": 3,
+    "name": "Charlie Williams",
+    "image": "/images/employees/emp3.png",
+    "age": 28,
+    "gender": "ชาย",
+    "department": "ไอที"
+  },
+  {
+    "id": 4,
+    "name": "Diana Brown",
+    "image": "/images/employees/emp4.png",
+    "age": 28,
+    "gender": "หญิง",
+    "department": "การตลาด"
+  },
+  {
+    "id": 5,
+    "name": "Ethan Davis",
+    "image": "/images/employees/emp5.png",
+    "age": 28,
+    "gender": "ชาย",
+    "department": "ไอที"
+  },
+  {
+    "id": 6,
+    "name": "Fiona Miller",
+    "image": "/images/employees/emp6.png",
+    "age": 28,
+    "gender": "หญิง",
+    "department": "การตลาด"
+  },
+  {
+    "id": 7,
+    "name": "George Wilson",
+    "image": "/images/employees/emp7.png",
+    "age": 28,
+    "gender": "ชาย",
+    "department": "บุคคล"
+  },
+  {
+    "id": 8,
+    "name": "Henry Moore",
+    "image": "/images/employees/emp8.png",
+    "age": 28,
+    "gender": "ชาย",
+    "department": "ไอที"
+  },
+  {
+    "id": 9,
+    "name": "Ivy Taylor",
+    "image": "/images/employees/emp9.png",
+    "age": 28,
+    "gender": "หญิง",
+    "department": "บุคคล"
+  },
+  {
+    "id": 10,
+    "name": "Jack Anderson",
+    "image": "/images/employees/emp10.png",
+    "age": 28,
+    "gender": "ชาย",
+    "department": "ไอที"
+  }
+]

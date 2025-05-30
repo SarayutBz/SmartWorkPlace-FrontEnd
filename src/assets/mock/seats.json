@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "branchId": 1,
+    "seatNumber": "BKK-01",
+    "status": "available"
+  },
+  {
+    "id": 2,
+    "branchId": 1,
+    "seatNumber": "BKK-02",
+    "status": "reserved"
+  },
+  {
+    "id": 3,
+    "branchId": 2,
+    "seatNumber": "CHB-01",
+    "status": "available"
+  },
+  {
+    "id": 4,
+    "branchId": 3,
+    "seatNumber": "CNX-01",
+    "status": "available"
+  }
+]
