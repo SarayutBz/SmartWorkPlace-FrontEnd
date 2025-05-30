@@ -2,85 +2,76 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="teal darken-2"
       dark
+      elevate-on-scroll
+      flat
     >
-      <div class="d-flex align-center">
+      <!-- โลโก้ + ชื่อเว็บ -->
+      <!-- <v-btn icon @click="$router.push('/')" aria-label="Home">
         <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
+          alt="SeatBook Logo"
+          src="https://cdn-icons-png.flaticon.com/512/2917/2917997.png"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
           width="40"
         />
+      </v-btn> -->
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-toolbar-title class="hidden-sm-and-down" style="cursor: pointer" @click="$router.push('/')">
+        SeatBook
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <!-- เมนูหลัก -->
+      <v-btn text to="/" class="mx-2" exact>
+        Dashboard
       </v-btn>
+      <v-btn text to="/book-seat" class="mx-2">
+        Book Seat
+      </v-btn>
+      <v-btn text to="/my-bookings" class="mx-2">
+        My Bookings
+      </v-btn>
+      <v-btn text to="/employees" class="mx-2">
+        Employees
+      </v-btn>
+      <v-btn text to="/settings" class="mx-2">
+        Settings
+      </v-btn>
+
+
+      <!-- ปุ่มลิงก์ช่วยเหลือ -->
+      <!-- <v-btn href="https://help.seatbook.example.com" target="_blank" text class="ml-4" rel="noopener">
+        <v-icon left>mdi-lifebuoy</v-icon> ช่วยเหลือ
+      </v-btn> -->
     </v-app-bar>
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-
-  data: () => ({
-    //
-  }),
+  name: "App",
 };
 </script>
 
-
-<style>
-
-html, body {
-  overflow-x: hidden;
-}
-.v-card {
-  border-radius: 20px !important;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
+<style scoped>
+.v-toolbar-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  user-select: none;
+  color: #ffffff;
 }
 
-.chart-card {
-  border-radius: 20px !important;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
+.v-btn {
+  font-weight: 500;
 }
 
-
-.apexcharts-canvas {
-  border-radius: 20px !important;
-  overflow: hidden;
+.v-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 </style>
