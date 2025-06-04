@@ -1,34 +1,56 @@
-<template>
-  <v-app>
-    <v-row no-gutters>
-      <SidebarLeft />
-      <DashboardContent
-        :employeeCount="employeeCount"
-        :branchCount="branchCount"
-        :seatCount="seatCount"
-      />
-      <SidebarRightCalendar />
-    </v-row>
-  </v-app>
-</template>
-
 <script>
 import SidebarLeft from "@/components/dashboard/SidebarLeft.vue";
 import SidebarRightCalendar from "@/components/dashboard/SidebarRightCalendar.vue";
 import DashboardContent from "@/components/dashboard/DashboardContent.vue";
-import employees from "@/assets/mock/mock-data.json";
-import branches from "@/assets/mock/branches.json";
-import seats from "@/assets/mock/seats.json";
+import axios from "axios";
 
 export default {
   name: "DashboardView",
   components: { SidebarLeft, SidebarRightCalendar, DashboardContent },
   data() {
     return {
-      employeeCount: employees.length,
-      branchCount: branches.length,
-      seatCount: seats.length,
+      dashboardData: null,
+      error: null,
+      loading: true,
     };
   },
+  async created() {
+    try {
+      const res = await axios.get("http://localhost:3000/dashboard");
+      this.dashboardData = res.data;
+
+      console.log("✅ Dashboard API:", this.dashboardData);
+
+    } catch (err) {
+      this.error = err;
+    } finally {
+      this.loading = false;
+    }
+  }
 };
 </script>
+
+<template>
+  <v-app>
+    <v-row no-gutters>
+      <SidebarLeft />
+
+      <v-col>
+        <div v-if="loading">Loading...</div>
+        <div v-else-if="error">Error: {{ error.message }}</div>
+        <div v-else>
+          <DashboardContent
+            :employeeCount="dashboardData.totalEmployees"
+            :totalSeats="dashboardData.totalSeats"
+            :occupiedSeats="dashboardData.occupiedSeats"
+            :availableSeats="dashboardData.availableSeats"
+            :labels="dashboardData.labels"
+            :chartData="dashboardData.data"
+          />
+        </div>
+      </v-col>
+
+      <SidebarRightCalendar />
+    </v-row>
+  </v-app>
+</template>
