@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashboardView from '@/views/DashboardView.vue'
+import TableView from '@/components/Dashboard/TableEmployees.vue'
 // import tableView from '@/components/tableView.vue'
 Vue.use(VueRouter)
 
@@ -19,7 +20,7 @@ const routes = [
   {
     path: '/table',
     name: 'table',
-    component: HomeView
+    component: TableView
   },
   
   
