@@ -22,17 +22,22 @@ export default {
     }
   },
   async created() {
-    try {
-      const res = await axios.get('http://localhost:3000/employee')
-      if (res.data.success) {
-        this.employees = res.data.data
-      } else {
-        this.error = 'Failed to load employees.'
-      }
-    } catch (err) {
-      this.error = 'Error fetching employees: ' + err.message
+  try {
+    const res = await axios.get('http://localhost:3000/employee')
+    console.log('API response:', res.data)  // ดูข้อมูลทั้งหมดที่ได้จาก API
+    if (res.data.success) {
+      this.employees = res.data.data
+      console.log('Employees sample:', this.employees[0])  // ดูข้อมูลพนักงานตัวแรก
+    } else {
+      this.error = 'Failed to load employees.'
     }
+  } catch (err) {
+    this.error = 'Error fetching employees: ' + err.message
   }
+}
+
+
+
 }
 </script>
 

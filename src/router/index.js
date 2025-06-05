@@ -10,6 +10,6 @@ export default new Router({
   routes: [
     { path: "/", name: "Dashboard", component: Dashboard },
     { path: "/employees", name: "Employees", component: EmployeeTable },
-    { path: "/seats", name: "SeatTable", component: SeatTable }
+    { path: "/seats", name: "SeatTable", component: SeatTable },
   ]
 });
