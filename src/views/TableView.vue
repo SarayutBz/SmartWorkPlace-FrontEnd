@@ -1,18 +1,34 @@
 <template>
-    <div>
-        <TableEmployees/>
+    
+    <div class="flex">
+    
+        <SideBar />
+        <div class="box">
+            <NavBar />
+
+            <TableEmployees />
+
+
+        </div>
     </div>
 </template>
 
 <script>
-import TableEmployees from '@/components/TableEmployees.vue';
-    export default {
-        components:{
-            TableEmployees
-        }
+import SideBar from '@/components/SideBar.vue';
+import NavBar from '@/components/NavBar.vue';
+// import TableEmployees from '@/components/TableEmployees.vue';
+import TableEmployees from '@/components/Dashboard/TableEmployees.vue';
+export default {
+    components: {
+        TableEmployees,
+        SideBar,
+        NavBar
     }
+}
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.box {
+    width: 100%;
+}
 </style>

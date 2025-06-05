@@ -1,7 +1,8 @@
 <!-- eslint-disable no-undef -->
 <template>
   <div class="app">
-    <SideBar />
+   
+    <SideBar :name="routeName" />
     
     <div class="box-content ">
       <NavBar />
@@ -63,6 +64,11 @@ export default {
       charts: {},
     };
   },
+   computed: {
+    routeName() {
+      return this.$route.name;
+    }
+  }
 
 };
 </script>

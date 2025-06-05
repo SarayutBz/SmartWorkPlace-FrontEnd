@@ -1,19 +1,30 @@
 <template>
-        <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="profile-section">
-        <div class="profile-img">A</div>
-      </div>
-      <div class="sidebar-icon">
-        <i class="fas fa-th-large"></i>
-      </div>
-      <div class="sidebar-icon">
-        <i class="fas fa-table"></i>
-      </div>
-      <div class="sidebar-icon">
-        <i class="fas fa-clipboard-list"></i>
-      </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="profile-section">
+      <div class="profile-img">A</div>
     </div>
+
+    <router-link to="/dashboard">
+      
+      <div class="sidebar-icon" :style="name === 'dashboard' ? { backgroundColor: 'rgba(0, 122, 204, 0.1)' } : {}">
+        <i class="fa-solid fa-chart-pie"></i>
+      </div>
+
+    </router-link>
+
+    <router-link to="/center">
+      
+      <div class="sidebar-icon" :style="name === 'center' ? { backgroundColor: 'rgba(0, 122, 204, 0.1)' } : {}">
+        <i class="fa-solid fa-map-location-dot"></i>
+      </div>
+
+    </router-link>
+
+    <div class="sidebar-icon">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+  </div>
 
 </template>
 
@@ -65,7 +76,16 @@
   color: #666;
   font-size: 18px;
 }
-
-
-
 </style>
+
+<script>
+export default {
+  props: {
+    name: {
+      type: String,
+      required: false,
+    }
+  }
+}
+
+</script>

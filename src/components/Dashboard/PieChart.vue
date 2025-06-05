@@ -2,6 +2,7 @@
     <!-- Pie Chart -->
     <div class="chart-card">
         <div class="chart-title">สถานะที่นั่ง</div>
+        
         <div class="chart-container small">
             <canvas ref="pieChart"></canvas>
         </div>
@@ -9,24 +10,40 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
     mounted() {
-        this.renderChart();
+
+        this.renderChart()
+
+    },
+    computed: {
+        ...mapGetters(['getDashboard']),
+
+        allDashboard() {
+            return this.getDashboard
+        }
+    },
+
+    created() {
+        this.fetchDashboard()
     },
     beforeDestroy() {
         if (this.chart) this.chart.destroy();
     },
 
+
     methods: {
+        ...mapActions(['fetchDashboard']),
         renderChart() {
             // eslint-disable-next-line no-undef
             this.charts = new Chart(this.$refs.pieChart, {
                 type: "doughnut",
                 data: {
-                    labels: ["ตรงเวลา", "ไม่ตรงเวลา"],
+                    labels: ["ว่าง", "ไม่ว่าง"],
                     datasets: [
                         {
-                            data: [70, 30],
+                            data: [this.allDashboard.availableSeats, this.allDashboard.occupiedSeats],
                             backgroundColor: ["#10B981", "#EF4444"],
                             borderWidth: 0,
 

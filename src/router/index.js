@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashboardView from '@/views/DashboardView.vue'
-import TableView from '@/components/Dashboard/TableEmployees.vue'
+import TableView from '@/views/TableView.vue'
 // import tableView from '@/components/tableView.vue'
+import CenterView from '@/components/Center/CenterSelect.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +22,11 @@ const routes = [
     path: '/table',
     name: 'table',
     component: TableView
+  },
+  {
+    path: '/center',
+    name: 'center',
+    component: CenterView
   },
   
   

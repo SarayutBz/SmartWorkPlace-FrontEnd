@@ -8,13 +8,13 @@ export default new Vuex.Store({
   state: {
     seats: [],
     employees: [],
+    dashboard:[]
   },
   actions: {
     async fetchSeats({ commit }) {
       try {
-        const response = await fetch("http://localhost:3000/seats/seatings");
+        const response = await fetch("http://localhost:3000/seats");
         const data = await response.json();
-        // สมมติ API คืน array ของ object แบบนี้
         commit("setSeats", data);
       } catch (error) {
         console.error("Failed to fetch seats:", error);
@@ -30,6 +30,17 @@ export default new Vuex.Store({
         console.error("Failed to fetch employees:", error);
       }
     },
+    async fetchDashboard({ commit }) {
+      try {
+        const res = await fetch("http://localhost:3000/dashboard");
+        const json = await res.json();
+        commit("setDashboard", json); 
+        // console.log(json)
+      } catch (error) {
+        console.error("Failed to fetch Dashboard:", error);
+      }
+    },
+
   },
   mutations: {
     setSeats(state, seats) {
@@ -37,6 +48,9 @@ export default new Vuex.Store({
     },
     setEmployees(state, employees) {
       state.employees = employees;
+    },
+    setDashboard(state, dashboard) {
+      state.dashboard = dashboard;
     },
   },
 
@@ -47,5 +61,10 @@ export default new Vuex.Store({
     getEmployees(state) {
       return state.employees;
     },
+  
+    getDashboard(state) {
+      return state.dashboard;
+    },
   },
-});
+}
+);
