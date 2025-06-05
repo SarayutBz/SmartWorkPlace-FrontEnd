@@ -36,6 +36,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
+
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 

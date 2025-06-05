@@ -4,14 +4,17 @@
             <SideBar />
             <div class="box">
                 <NavBar />
+                <p class="text-center">
 
-                <v-row class="m-2">
-                    <v-col cols="12" sm="6">
+                    {{ SvgName }}
+                </p>
+                <v-row class="m-2 justify-center">
+                    <v-col cols="5" sm="2">
                         <v-select :items="province" label="จังหวัด" outlined v-model="selectedProvince"
                             @change="onProvinceSelect"></v-select>
                     </v-col>
 
-                    <v-col cols="12" sm="6">
+                    <v-col cols="5" sm="2">
                         <!-- <v-select :items="building" label="ตึก" outlined
                             :disabled="!isBuildingEnabled || isBuildingLoading" :loading="isBuildingLoading"
                             v-model="selectedBuilding" @change="onProvinceSelect2"></v-select> -->
@@ -22,11 +25,17 @@
 
                     </v-col>
 
-                    <v-col cols="12" sm="6">
+                    <v-col cols="5" sm="2">
                         <v-select :items="floor" label="ชั้น" outlined :disabled="!isFloorEnabled || isFloorLoading"
-                            :loading="isFloorLoading"></v-select>
+                            :loading="isFloorLoading" item-text="text" item-value="value" v-model="selectedFloor" />
+
+
                     </v-col>
                 </v-row>
+
+                <div v-show="isShowSvg" class="box-svg flex justify-center">
+                     <v-img v-if="isShowSvg" :src="`/svg/${SvgName}.svg`" max-width="750" />
+                </div>
             </div>
         </div>
     </v-app>
@@ -44,16 +53,36 @@ export default {
         floor: [],
         selectedProvince: '',
         selectedBuilding: '',
+        selectedFloor: '',
         isBuildingLoading: false,
         isBuildingEnabled: false,
         isFloorLoading: false,
         isFloorEnabled: false,
+        isShowSvg: false,
+        SvgName: ''
     }),
+
     components: {
         NavBar,
         SideBar,
     },
+    watch: {
+        selectedBuilding() {
+            this.updateSvgName()
+        },
+        selectedFloor() {
+            this.updateSvgName()
+        }
+    },
     methods: {
+        updateSvgName() {
+            if (this.selectedBuilding && this.selectedFloor) {
+                this.SvgName = `${this.selectedBuilding}-${this.selectedFloor}`
+                this.isShowSvg = true
+            } else {
+                this.isShowSvg = false
+            }
+        },
         onProvinceSelect(province) {
             const provinceSlug = this.slugify(province)
 
@@ -68,12 +97,13 @@ export default {
 
                     // this.building = res.data.data
                     this.building = res.data.data.map(item => ({
-                        text: item.name,
-                        value: item.slug
+                        text: item.name, // ชื่อตึก
+                        value: item.slug //  id 
                     }))
 
                     this.isBuildingEnabled = true
-                    // console.log(res.data)
+                    // console.log("อันแรก : ", res.data)
+
 
                 })
                 .catch((err) => {
@@ -87,12 +117,20 @@ export default {
         },
         onProvinceSelect2() {
             const buildingSlug = this.selectedBuilding
-            // console.log(buildingSlug)
+            console.log(buildingSlug)
             axios
                 .get(`http://localhost:3000/building/?floor=${buildingSlug}`)
                 .then((res) => {
+                    // console.log("อันที่ 2 : ", res.data)
                     this.floor = res.data.data || []
+                    this.floor = res.data.data.map(item => ({
+                        text: item.name,
+                        value: item.slug,
+                    }))
                     this.isFloorEnabled = true
+
+                    // console.log(buildingSlug+res.data.data[0])
+                    // this.SvgName.push(buildingSlug+res.data.data)
                 })
                 .catch((err) => {
                     console.error('โหลดชั้นไม่สำเร็จ:', err)
@@ -104,7 +142,6 @@ export default {
                 })
         },
 
-
         slugify(name) {
             if (name === 'เชียงใหม่') return 'cnx'
             if (name === 'กรุงเทพ') return 'bkk'
@@ -112,8 +149,7 @@ export default {
             if (name === 'สงขลา') return 'hdy'
             if (name === 'สระบุรี') return 'sri'
             return name
-        },
-
+        }
     },
 }
 </script>
