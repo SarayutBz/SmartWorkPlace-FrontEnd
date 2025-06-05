@@ -15,6 +15,7 @@
           title="ที่นั่งทั้งหมด"
           :value="`${totalSeats} ที่นั่ง`"
           color="blue lighten-4"
+          @click="goToSeatList"
         />
       </v-col>
 
@@ -59,6 +60,9 @@ export default {
   methods: {
     goToEmployeeTable() {
       this.$router.push("/employees");
+    },
+    goToSeatList() {
+      this.$router.push("/seats");  // เปลี่ยน path ไปหน้า seatlist
     },
   },
 };
