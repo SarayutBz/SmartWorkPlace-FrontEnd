@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-10">
     <v-row justify="center" align="stretch" class="mb-6" dense>
-      <!-- Location Selector Card (กว้างกว่า) -->
+      <!-- Location Selector Card -->
       <v-col cols="12" md="7">
         <v-card class="pa-6 d-flex flex-column" outlined>
           <v-card-title class="headline green--text pb-4">
@@ -28,15 +28,17 @@
             class="mt-6"
             style="flex-grow: 1; width: 100%; border: 1px solid #ccc; border-radius: 8px;"
           >
-            <FloorMap
-              :svgContent="svgUrl"
-              @zone-click="onZoneClick"
-            />
+           <FloorMap
+            :svgContent="svgUrl"
+            :highlightedSeat="selectedSeatId" 
+            @zone-click="onZoneClick"
+          />
+
           </div>
         </v-card>
       </v-col>
 
-      <!-- Employee Search Card (แคบกว่า) -->
+      <!-- Employee Search Card -->
       <v-col cols="12" md="4">
         <v-card class="pa-6 d-flex flex-column" outlined>
           <v-card-title class="headline green--text pb-4">
@@ -45,7 +47,8 @@
 
           <EmployeeSearch
             :isLoading="isLoading"
-            @search="onEmployeeSearch"
+            @search-result="handleSearchResult"
+            @view-seat-zone="highlightSeatZone"
           />
         </v-card>
       </v-col>
@@ -53,17 +56,16 @@
   </v-container>
 </template>
 
-
 <script>
 import LocationSelector from '@/components/homepage/LocationSelector.vue'
 import FloorMap from '@/components/homepage/FloorMap.vue'
-import EmployeeSearch from '@/components/homepage/EmployeeSearch.vue'  // เพิ่ม import
+import EmployeeSearch from '@/components/homepage/EmployeeSearch.vue'
 
 export default {
   components: {
     LocationSelector,
     FloorMap,
-    EmployeeSearch,  // ลงทะเบียน component
+    EmployeeSearch,
   },
   data() {
     return {
@@ -83,15 +85,14 @@ export default {
 
       isLoading: false,
       svgUrl: null,
+      selectedSeatId: null,
     }
   },
-
   computed: {
     canSubmit() {
       return this.selectedProvince && this.selectedBuilding && this.selectedFloor
     }
   },
-
   methods: {
     async onProvinceChange(newVal) {
       this.selectedProvince = newVal
@@ -180,10 +181,20 @@ export default {
       this.$router.push({ name: 'ZoneDetail', params: { zoneId } })
     },
 
-    onEmployeeSearch(employeeId) {
-      // รับ event ค้นหาจาก EmployeeSearch.vue
-      console.log('ค้นหาพนักงาน รหัส:', employeeId)
-      // เขียน logic เพิ่มเติม เช่น ดึงข้อมูลพนักงานจาก API
+    handleSearchResult(employee) {
+      console.log('ค้นหาเจอ:', employee)
+    },
+
+    highlightSeatZone(employee) {
+      console.log('จะเน้นที่นั่งของ:', employee)
+      this.selectedSeatId = employee.seatId || 'A1'
+    },
+
+    viewSeatZone() {
+      if (this.employee) {
+        console.log('viewSeatZone clicked', this.employee)
+        this.$emit('view-seat-zone', this.employee)
+      }
     }
   }
 }

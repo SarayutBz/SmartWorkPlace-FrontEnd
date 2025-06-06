@@ -15,12 +15,13 @@
           <v-card-title class="text-h6">แผนผังโซน</v-card-title>
           <v-divider></v-divider>
           <v-card-text>
-            <interactive-svg 
+           <interactive-svg 
               v-if="svgContent" 
               :svgContent="svgContent" 
               :occupiedTables="occupiedTables"
               @table-click="handleTableClick" 
             />
+
             <div v-else class="text-center grey--text">
               กำลังโหลดแผนผัง...
             </div>
@@ -106,19 +107,19 @@ export default {
   data() {
     return {
       svgContent: null,
-      selectedTableId: null,
-      occupiedTables: [], // โต๊ะที่ไม่ว่าง (จองแล้ว)
+      selectedTableId: null,  // เช่น 'tableA1'
+      occupiedTables: [],     // เก็บ id SVG โต๊ะที่ไม่ว่าง เช่น ['tableA1', 'tableA2']
       availableTables: [],
       tableIsAvailable: true,
 
-      bookedTables: {}, // เก็บข้อมูลพนักงานที่จองโต๊ะ
+      bookedTables: {},       // map id SVG โต๊ะ => ข้อมูลพนักงาน { 'tableA1': { _id, firstname, ... } }
 
       showAddDialog: false,
       employeeCode: '',
       matchedEmployee: null,
       searched: false,
 
-      editingMode: 'add', // 'add' หรือ 'edit' กำหนดว่าเปิด popup เพื่อเพิ่ม หรือแก้ไข
+      editingMode: 'add',     // 'add' หรือ 'edit' กำหนดว่าเปิด popup เพื่อเพิ่ม หรือแก้ไข
     }
   },
 
@@ -140,6 +141,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.loadTablesData()
+  },
+
   methods: {
     async loadZoneSvg(zoneId) {
       this.svgContent = null
@@ -155,7 +160,40 @@ export default {
       }
     },
 
+    async loadTablesData() {
+      try {
+        const res = await axios.get('http://localhost:3000/seats/table')
+        const tables = res.data.data || []
+
+        // สร้าง list โต๊ะที่ไม่ว่าง โดยแปลง tableNumber เป็น id SVG เช่น 'tableA1'
+        const occupied = tables
+          .filter(t => t.status === 'active' && t.emp_id)
+          .map(t => 'tableA' + t.tableNumber)
+
+        this.occupiedTables = occupied
+
+        // โหลดข้อมูลพนักงานทั้งหมด
+        const empRes = await axios.get('http://localhost:3000/employee')
+        const allEmployees = empRes.data.data || empRes.data
+
+        // สร้าง map โต๊ะ => ข้อมูลพนักงานที่จอง
+        let booked = {}
+        for (const table of tables) {
+          if (table.status === 'active' && table.emp_id) {
+            const emp = allEmployees.find(e => e._id === table.emp_id)
+            if (emp) {
+              booked['tableA' + table.tableNumber] = emp
+            }
+          }
+        }
+        this.bookedTables = booked
+      } catch (error) {
+        console.error('เกิดข้อผิดพลาดในการโหลดข้อมูลโต๊ะหรือพนักงาน:', error)
+      }
+    },
+
     handleTableClick(id) {
+      // id ตัวอย่าง 'tableA1'
       this.selectedTableId = id
       this.tableIsAvailable = !this.occupiedTables.includes(id)
     },
@@ -173,7 +211,6 @@ export default {
       this.showAddDialog = true
       this.searched = false
 
-      // ดึงข้อมูลเจ้าของโต๊ะเก่า (ถ้ามี) มาแสดงในช่องกรอกรหัส
       const occupant = this.bookedTables[this.selectedTableId]
       if (occupant) {
         this.employeeCode = occupant._id
@@ -184,24 +221,25 @@ export default {
       }
     },
 
-    deletePermission() {
+    async deletePermission() {
       const confirmed = confirm(`❗ คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลโต๊ะ ${this.selectedTableId} ?`)
       if (!confirmed) return
 
-      // ลบออกจาก occupiedTables
-      this.occupiedTables = this.occupiedTables.filter(id => id !== this.selectedTableId)
+      try {
+        // แปลง 'tableA1' เป็น '1' ก่อนส่ง API
+        const tableNumber = this.selectedTableId.replace('tableA', '')
 
-      // ลบออกจาก bookedTables
-      delete this.bookedTables[this.selectedTableId]
+        await axios.delete(`http://localhost:3000/seats/table/${tableNumber}`)
+        alert(`✅ ลบข้อมูลโต๊ะ ${this.selectedTableId} เรียบร้อยแล้ว`)
 
-      // ตั้งค่าว่าโต๊ะว่าง
-      this.tableIsAvailable = true
-
-      // ปิด popup ถ้ามี
-      this.showAddDialog = false
-
-      // แจ้งเตือน
-      alert(`✅ ลบข้อมูลโต๊ะ ${this.selectedTableId} เรียบร้อยแล้ว`)
+        await this.loadTablesData()
+        this.tableIsAvailable = true
+        this.showAddDialog = false
+        this.selectedTableId = null
+      } catch (error) {
+        alert('เกิดข้อผิดพลาดในการลบข้อมูลโต๊ะ')
+        console.error(error)
+      }
     },
 
     async searchEmployee() {
@@ -229,30 +267,33 @@ export default {
       }
     },
 
-    assignToTable() {
-      if (!this.matchedEmployee) return
+    async assignToTable() {
+      if (!this.matchedEmployee || !this.selectedTableId) return
 
-      if (this.editingMode === 'add') {
-        alert(`✅ เพิ่มสิทธิ์ให้พนักงาน ${this.matchedEmployee.firstname} ที่โต๊ะ ${this.selectedTableId}`)
-        if (!this.occupiedTables.includes(this.selectedTableId)) {
-          this.occupiedTables.push(this.selectedTableId)
+      try {
+        const tableNumber = this.selectedTableId.replace('tableA', '') // ดึงเลขโต๊ะจาก id SVG เช่น "tableA1" -> "1"
+        const emp_id = this.matchedEmployee._id
+
+        if (this.editingMode === 'add') {
+          // ใช้ POST ตาม API ใหม่
+          await axios.put(`http://localhost:3000/seats/table/${tableNumber}/${emp_id}`)
+          alert(`✅ เพิ่มสิทธิ์ให้พนักงาน ${this.matchedEmployee.firstname} ที่โต๊ะ ${tableNumber}`)
+        } else if (this.editingMode === 'edit') {
+          // ถ้า API แก้ไขเป็น PUT ที่ path เดียวกัน ก็เขียนแบบนี้
+          await axios.put(`http://localhost:3000/seats/table/${tableNumber}/${emp_id}`)
+          alert(`✏️ แก้ไขเจ้าของโต๊ะเป็นพนักงาน ${this.matchedEmployee.firstname} ที่โต๊ะ ${tableNumber}`)
         }
-      } else if (this.editingMode === 'edit') {
-        alert(`✏️ แก้ไขเจ้าของโต๊ะเป็นพนักงาน ${this.matchedEmployee.firstname} ที่โต๊ะ ${this.selectedTableId}`)
-      }
 
-      // บันทึกข้อมูลพนักงานที่จองโต๊ะนี้ (เพิ่ม/แก้ไข)
-      this.bookedTables = {
-        ...this.bookedTables,
-        [this.selectedTableId]: this.matchedEmployee
+        await this.loadTablesData()
+        this.tableIsAvailable = false
+        this.showAddDialog = false
+      } catch (error) {
+        alert('เกิดข้อผิดพลาดในการบันทึกข้อมูลโต๊ะ')
+        console.error(error)
       }
-
-      this.tableIsAvailable = false
-      this.showAddDialog = false
     }
   }
 }
-
 </script>
 
 <style scoped>

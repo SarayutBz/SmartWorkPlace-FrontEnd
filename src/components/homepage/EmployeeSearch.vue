@@ -38,6 +38,14 @@
           <div><strong>แผนก:</strong> {{ employee.department }}</div>
           <div><strong>ตำแหน่ง:</strong> {{ employee.position }}</div>
           <div><strong>โทร:</strong> {{ employee.phone }}</div>
+
+          <v-btn
+            color="primary"
+            class="mt-4"
+            @click="viewSeatZone"
+          >
+            ดูโซนที่นั่ง
+          </v-btn>
         </v-col>
       </v-row>
     </v-card>
@@ -49,7 +57,7 @@ export default {
   props: {
     isLoading: Boolean,
   },
-  emits: ['search-result'],
+  emits: ['search-result', 'view-seat-zone'],
   data() {
     return {
       employeeId: '',
@@ -71,7 +79,6 @@ export default {
         const json = await res.json();
 
         if (json.success && json.data.length > 0) {
-          // กรองข้อมูลใน frontend โดยเทียบกับ employeeId
           const found = json.data.find(emp => emp._id === this.employeeId);
 
           if (found) {
@@ -87,6 +94,11 @@ export default {
         alert('เกิดข้อผิดพลาดในการค้นหา: ' + error.message);
       } finally {
         this.isSearching = false;
+      }
+    },
+    viewSeatZone() {
+      if (this.employee) {
+        this.$emit('view-seat-zone', this.employee);
       }
     },
   },
