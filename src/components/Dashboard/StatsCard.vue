@@ -24,12 +24,7 @@
       <div class="stat-label">ที่นั่งว่าง</div>
       <div class="stat-icon"><i class="fas fa-check"></i></div>
     </div>
-    <div class="stat-card">
-      <div class="stat-number">{{ allSeats[0].floor }}</div>
-      <div class="stat-label">ชั้น</div>
-      <div class="stat-icon"><i class="fas fa-check"></i></div>
-    </div>
-
+   
   </div>
 </template>
 

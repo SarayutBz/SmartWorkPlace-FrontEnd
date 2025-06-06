@@ -1,55 +1,91 @@
 <template>
-    <v-app>
-        <div class="flex">
-            <SideBar />
-            <div class="box">
-                <NavBar />
-                <p class="text-center">
-                    {{ SvgName }}
-                </p>
-                <v-row class="m-2 justify-center">
-                    <v-col cols="5" sm="2">
-                        <v-select :items="province" label="จังหวัด" outlined v-model="selectedProvince"
-                            @change="onProvinceSelect"></v-select>
-                    </v-col>
+  <v-app>
+    <div class="flex">
+      <SideBar />
 
-                    <v-col cols="5" sm="2">
-                        <!-- <v-select :items="building" label="ตึก" outlined
-                            :disabled="!isBuildingEnabled || isBuildingLoading" :loading="isBuildingLoading"
-                            v-model="selectedBuilding" @change="onProvinceSelect2"></v-select> -->
-                        <v-select :items="building" label="ตึก" outlined
-                            :disabled="!isBuildingEnabled || isBuildingLoading" :loading="isBuildingLoading"
-                            v-model="selectedBuilding" @change="onProvinceSelect2" item-text="text"
-                            item-value="value" />
-                    </v-col>
+      <div class="flex-1 min-h-screen bg-gray-50 p-4">
+        <NavBar />
 
-                    <v-col cols="5" sm="2">
-                        <v-select :items="floor" label="ชั้น" outlined :disabled="!isFloorEnabled || isFloorLoading"
-                            :loading="isFloorLoading" item-text="text" item-value="value" v-model="selectedFloor" />
-                    </v-col>
-                </v-row>
+        <!-- แสดงชื่อ SVG -->
+        <h2 class="text-center text-xl font-semibold text-gray-700 my-4">
+          {{ SvgName }}
+        </h2>
 
-                <div v-if="isShowSvg">
-                    <div v-show="isShowSvg" class="box-svg flex justify-center">
-                        <!-- Render SVG ด้วย v-html -->
-                        <div id="svg-container" class="max-w-[750px]" v-html="svgContent" @click="onZoneClick"></div>
-                    </div>
-                </div>
-                <div v-else class="flex justify-center items-center h-64">
-                    <div class="bg-gray-900 text-white px-6 py-4 rounded-xl shadow-lg">
-                        <h1 class="text-lg font-semibold">กรุณาเลือกฟอร์มก่อน</h1>
-                    </div>
-                </div>
+        <!-- แถว dropdown จังหวัด / ตึก / ชั้น -->
+        <v-row class="justify-center gap-4 mb-6">
+          <v-col cols="12" sm="3">
+            <v-select
+              :items="province"
+              label="จังหวัด"
+              outlined
+              v-model="selectedProvince"
+              @change="onProvinceSelect"
+            />
+          </v-col>
 
+          <v-col cols="12" sm="3">
+            <v-select
+              :items="building"
+              label="ตึก"
+              outlined
+              v-model="selectedBuilding"
+              :disabled="!isBuildingEnabled || isBuildingLoading"
+              :loading="isBuildingLoading"
+              item-text="text"
+              item-value="value"
+              @change="onProvinceSelect2"
+            />
+          </v-col>
 
+          <v-col cols="12" sm="3">
+            <v-select
+              :items="floor"
+              label="ชั้น"
+              outlined
+              v-model="selectedFloor"
+              :disabled="!isFloorEnabled || isFloorLoading"
+              :loading="isFloorLoading"
+              item-text="text"
+              item-value="value"
+            />
+          </v-col>
+        </v-row>
 
-                <p class="text-center mt-4" v-if="selectedZone">
-                    ✅ คุณเลือกโซน: <strong>{{ selectedZone }}</strong>
-                </p>
-            </div>
+        <!-- ช่องค้นหา -->
+        <v-row justify="center" class="mb-6">
+          <v-col cols="12" sm="6">
+            <v-card class="p-4">
+              <v-text-field label="Search Employee ID" outlined dense />
+              <v-row justify="center" class="mt-2">
+                <v-btn color="primary" tile>
+                  <v-icon left>fas fa-search</v-icon>
+                  Search
+                </v-btn>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <!-- แสดง SVG หรือแจ้งเตือน -->
+        <div class="flex justify-center">
+          <div v-if="isShowSvg" class="box-svg max-w-4xl p-4 bg-white rounded-lg shadow-md">
+            <div id="svg-container" v-html="svgContent" @click="onZoneClick"></div>
+          </div>
+
+          <div v-else class="flex items-center justify-center h-64 bg-red-100 text-red-800 px-6 py-4 rounded-xl shadow-md">
+            <h1 class="text-lg font-semibold">กรุณาเลือกฟอร์มก่อน</h1>
+          </div>
         </div>
-    </v-app>
+
+        <!-- แสดงโซนที่เลือก -->
+        <p class="text-center mt-6 text-green-600 font-medium" v-if="selectedZone">
+          ✅ คุณเลือกโซน: <strong>{{ selectedZone }}</strong>
+        </p>
+      </div>
+    </div>
+  </v-app>
 </template>
+
 
 <script>
 import axios from 'axios'
@@ -186,9 +222,14 @@ export default {
 </script>
 
 <style>
-.box {
-    width: 100%;
+.box-svg {
+  max-width: 750px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
 
 #svg-container svg [data-zone] {
     cursor: pointer;
