@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row justify="center">
+    <v-row justify="center" dense>
       <v-col cols="12" md="3">
         <SummaryCard
           title="พนักงานทั้งหมด"
@@ -35,9 +35,19 @@
         />
       </v-col>
 
+      <!-- เพิ่ม v-card ห่อ CheckinChart -->
       <v-col cols="12" md="6">
-        <CheckinChart :labels="labels" :data="chartData" />
+        <v-card
+          elevation="2"
+          class="chart-card pa-4 d-flex flex-column"
+        >
+          <v-card-title class="text-h6">Check-in Chart</v-card-title>
+          <v-card-text class="flex-grow-1 d-flex align-center justify-center">
+            <CheckinChart :labels="labels" :data="chartData" />
+          </v-card-text>
+        </v-card>
       </v-col>
+
     </v-row>
   </v-container>
 </template>
@@ -55,15 +65,22 @@ export default {
     occupiedSeats: Number,
     availableSeats: Number,
     labels: Array,
-    chartData: Array
+    chartData: Array,
   },
   methods: {
     goToEmployeeTable() {
       this.$router.push("/employees");
     },
     goToSeatList() {
-      this.$router.push("/seats");  // เปลี่ยน path ไปหน้า seatlist
+      this.$router.push("/seats");
     },
   },
 };
 </script>
+
+<style scoped>
+.chart-card {
+  min-height: 180px; /* เท่ากับ SummaryCard */
+}
+
+</style>

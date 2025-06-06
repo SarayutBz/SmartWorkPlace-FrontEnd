@@ -1,0 +1,111 @@
+<svg width="100%" height="85%" viewBox="0 0 1500 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Saraburi" clip-path="url(#clip0_14_19)">
+<rect width="1440" height="1024" fill="white"/>
+<g id="Union">
+<mask id="path-1-inside-1_14_19" fill="white">
+<path d="M1440 0V766H752V1024H0V0H1440Z"/>
+</mask>
+<path d="M1440 0V766H752V1024H0V0H1440Z" fill="#D9D9D9"/>
+<path d="M1440 0H1441V-1H1440V0ZM1440 766V767H1441V766H1440ZM752 766V765H751V766H752ZM752 1024V1025H753V1024H752ZM0 1024H-1V1025H0V1024ZM0 0V-1H-1V0H0ZM1440 0H1439V766H1440H1441V0H1440ZM1440 766V765H752V766V767H1440V766ZM752 766H751V1024H752H753V766H752ZM752 1024V1023H0V1024V1025H752V1024ZM0 1024H1V0H0H-1V1024H0ZM0 0V1H1440V0V-1H0V0Z" fill="black" mask="url(#path-1-inside-1_14_19)"/>
+</g>
+<rect id="Rectangle 560" x="750.5" y="763.5" width="689" height="260" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 561" x="1136.5" y="105.5" width="303" height="657" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 562" x="0.5" y="0.5" width="688" height="104" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 563" x="649.5" y="239.5" width="39" height="108" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 564" x="649.5" y="348.5" width="39" height="108" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 565" x="649.5" y="457.5" width="39" height="108" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 566" x="649.5" y="566.5" width="39" height="108" fill="#D9D9D9" stroke="black"/>
+<path id="Line 2" d="M885 105L885.5 -1" stroke="black"/>
+<rect id="Rectangle 570" x="825.5" y="302.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569" x="825.5" y="261.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<path id="Line 1" d="M1137 106L1137.5 -2.4902e-06" stroke="black"/>
+<g id="tableS1">
+<rect id="Rectangle 569_2" x="63.5" y="250.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_3" x="22.5" y="198.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS2">
+<rect id="Rectangle 569_4" x="185.5" y="250.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_5" x="144.5" y="198.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS3">
+<rect id="Rectangle 569_6" x="307.5" y="250.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_7" x="266.5" y="198.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS4">
+<rect id="Rectangle 569_8" x="429.5" y="250.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_9" x="388.5" y="198.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS5">
+<rect id="Rectangle 569_10" x="63.5" y="396.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_11" x="22.5" y="344.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS6">
+<rect id="Rectangle 569_12" x="185.5" y="396.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_13" x="144.5" y="344.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS7">
+<rect id="Rectangle 569_14" x="307.5" y="396.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_15" x="266.5" y="344.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS8">
+<rect id="Rectangle 569_16" x="429.5" y="396.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_17" x="388.5" y="344.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS9">
+<rect id="Rectangle 569_18" x="63.5" y="547.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_19" x="22.5" y="495.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS10">
+<rect id="Rectangle 569_20" x="185.5" y="547.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_21" x="144.5" y="495.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS11">
+<rect id="Rectangle 569_22" x="307.5" y="547.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_23" x="266.5" y="495.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS12">
+<rect id="Rectangle 569_24" x="429.5" y="547.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_25" x="388.5" y="495.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS13">
+<rect id="Rectangle 569_26" x="63.5" y="698.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_27" x="22.5" y="646.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS14">
+<rect id="Rectangle 569_28" x="185.5" y="698.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_29" x="144.5" y="646.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS15">
+<rect id="Rectangle 569_30" x="307.5" y="698.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_31" x="266.5" y="646.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS16">
+<rect id="Rectangle 569_32" x="429.5" y="698.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_33" x="388.5" y="646.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS17">
+<rect id="Rectangle 569_34" x="63.5" y="864.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_35" x="22.5" y="812.5" width="114" height="51" fill="#D9D9D9" stroke="black"/>
+</g>
+<g id="tableS18">
+<rect id="Rectangle 567" x="885.5" y="0.5" width="252" height="58" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 568" x="994.5" y="59.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+</g>
+<rect id="Rectangle 570_2" x="859.5" y="238.5" width="158" height="255" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 569_36" x="825.5" y="348.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 571" x="825.5" y="388.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 572" x="825.5" y="434.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 573" x="1018.5" y="261.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 574" x="1018.5" y="302.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 575" x="1018.5" y="348.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 576" x="1018.5" y="388.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 577" x="1018.5" y="434.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 578" x="922.5" y="494.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+<rect id="Rectangle 579" x="922.5" y="208.5" width="33" height="29" fill="#D9D9D9" stroke="black"/>
+</g>
+<defs>
+<clipPath id="clip0_14_19">
+<rect width="1440" height="1024" fill="white"/>
+</clipPath>
+</defs>
+</svg>

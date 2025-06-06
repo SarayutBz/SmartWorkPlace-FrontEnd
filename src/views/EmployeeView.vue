@@ -11,7 +11,7 @@ import axios from 'axios'
 import EmployeeTable from '@/components/employees/EmployeeTable.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'EmployeeView',
   components: {
     EmployeeTable
   },

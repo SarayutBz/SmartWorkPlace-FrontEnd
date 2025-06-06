@@ -1,0 +1,18 @@
+<svg width="700" height="478" viewBox="0 0 1500 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="CNXfloor1" clip-path="url(#clip0_23_2)">
+    <rect width="1500" height="1024" fill="white"/>
+    <rect id="Rectangle 557" x="408.5" y="362.5" width="1091" height="661" fill="#D9D9D9" stroke="black"/>
+    <rect id="zoneA" x="0.5" y="0.5" width="458" height="361" fill="#FF8888" stroke="black"/>
+    <rect id="zoneB" x="459.5" y="0.5" width="329" height="361" fill="#66ADE6" stroke="black"/>
+    <rect id="zoneC" x="789.5" y="0.5" width="373" height="361" fill="#B1FEA1" stroke="black"/>
+    <rect id="zoneD" x="1163.5" y="0.5" width="336" height="361" fill="#E4FD77" stroke="black"/>
+    <rect id="zoneE" x="0.5" y="362.5" width="407" height="415" fill="#A589F8" stroke="black"/>
+    <rect id="zoneF" x="0.5" y="778.5" width="407" height="245" fill="#FF8BDC" stroke="black"/>
+    <rect id="Rectangle 7" x="568.5" y="555.5" width="784" height="468" fill="#D9D9D9" stroke="black"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_23_2">
+      <rect width="1500" height="1024" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>

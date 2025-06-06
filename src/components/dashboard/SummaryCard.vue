@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pa-4 text-center"
+    class="summary-card pa-4 text-center"
     :color="color"
     elevation="2"
     @click="$emit('click')"
@@ -32,9 +32,16 @@ export default {
 </script>
 
 <style scoped>
-.v-card:hover {
+.summary-card {
+  min-height: 180px; /* กำหนดความสูงขั้นต่ำเท่ากัน */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+
+.summary-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
-  transition: 0.3s ease;
 }
 </style>

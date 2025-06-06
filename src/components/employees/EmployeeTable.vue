@@ -42,10 +42,10 @@
         <v-card-text class="d-flex">
           <v-img
             :src="selected?.image_url"
-            width="50"
-            height="200"
-            cover
-            class="mr-4"
+            max-width="200"
+            max-height="200"
+            contain
+            class="mr-4 rounded-circle"
           />
 
           <div>

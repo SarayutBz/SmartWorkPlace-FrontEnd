@@ -7,15 +7,6 @@
       elevate-on-scroll
       flat
     >
-      <!-- โลโก้ + ชื่อเว็บ -->
-      <!-- <v-btn icon @click="$router.push('/')" aria-label="Home">
-        <v-img
-          alt="SeatBook Logo"
-          src="https://cdn-icons-png.flaticon.com/512/2917/2917997.png"
-          contain
-          width="40"
-        />
-      </v-btn> -->
 
       <v-toolbar-title class="hidden-sm-and-down" style="cursor: pointer" @click="$router.push('/')">
         SeatBook
@@ -24,10 +15,10 @@
       <v-spacer></v-spacer>
 
       <!-- เมนูหลัก -->
-      <v-btn text to="/" class="mx-2" exact>
+      <v-btn text to="/dashboard" class="mx-2" exact>
         Dashboard
       </v-btn>
-      <v-btn text to="/book-seat" class="mx-2">
+      <v-btn text to="/" class="mx-2">
         Book Seat
       </v-btn>
       <v-btn text to="/my-bookings" class="mx-2">
@@ -40,11 +31,6 @@
         Settings
       </v-btn>
 
-
-      <!-- ปุ่มลิงก์ช่วยเหลือ -->
-      <!-- <v-btn href="https://help.seatbook.example.com" target="_blank" text class="ml-4" rel="noopener">
-        <v-icon left>mdi-lifebuoy</v-icon> ช่วยเหลือ
-      </v-btn> -->
     </v-app-bar>
 
     <v-main>
