@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import TableView from '@/views/TableView.vue'
 // import tableView from '@/components/tableView.vue'
+import ZoneSelect from '@/components/Zone/ZoneSelect.vue'
 import CenterView from '@/components/Center/CenterSelect.vue'
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/center',
     name: 'center',
     component: CenterView
+  },
+  {
+    path: '/zone/:zoneName',
+    name: 'zone',
+    component: ZoneSelect
   },
   
   
