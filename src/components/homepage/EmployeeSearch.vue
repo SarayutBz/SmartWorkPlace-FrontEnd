@@ -39,13 +39,10 @@
           <div><strong>ตำแหน่ง:</strong> {{ employee.position }}</div>
           <div><strong>โทร:</strong> {{ employee.phone }}</div>
 
-          <v-btn
-            color="primary"
-            class="mt-4"
-            @click="viewSeatZone"
-          >
-            ดูโซนที่นั่ง
-          </v-btn>
+          <v-btn color="primary" @click="goToEmployeeSeat(employee)">
+        ดูตำแหน่งที่นั่ง
+        </v-btn>    
+
         </v-col>
       </v-row>
     </v-card>
@@ -101,6 +98,22 @@ export default {
         this.$emit('view-seat-zone', this.employee);
       }
     },
+     goToEmployeeSeat(employee) {
+        console.log(employee);
+        console.log('employee:', employee)
+        const zoneId = employee.zone;  // ไม่ต้องมี 'cm' default ถ้าไม่มี zone ก็แสดง error หรือ handle เพิ่มเติม
+        if (!zoneId) {
+          alert('ไม่พบโซนที่นั่งของพนักงาน');
+          return;
+        }
+        const seatId = employee.seatId;
+
+        this.$router.push({
+          name: 'ZoneDetail',
+          params: { zoneId },
+          query: { seat: seatId }
+        });
+    }
   },
 };
 </script>

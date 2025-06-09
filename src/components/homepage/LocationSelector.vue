@@ -75,7 +75,10 @@ export default {
     selectedBuilding: String,
     selectedFloor: String,
     isLoading: Boolean,
-    canSubmit: Boolean,
+     canSubmit: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: [
     'update:selectedProvince',

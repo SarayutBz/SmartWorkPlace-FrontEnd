@@ -90,9 +90,10 @@ export default {
   },
   computed: {
     canSubmit() {
-      return this.selectedProvince && this.selectedBuilding && this.selectedFloor
+      return Boolean(this.selectedProvince && this.selectedBuilding && this.selectedFloor)
     }
   },
+
   methods: {
     async onProvinceChange(newVal) {
       this.selectedProvince = newVal
@@ -164,7 +165,8 @@ export default {
 
       try {
         const fileName = `${this.selectedProvince}_${this.selectedBuilding}_${this.selectedFloor}.svg`
-        const res = await fetch(`/svg/${fileName}`)
+        const path = `/svg/${this.selectedProvince}/floor/${fileName}`
+        const res = await fetch(path)
         if (!res.ok) throw new Error('ไฟล์ SVG ไม่พบ')
         const svgText = await res.text()
         this.svgUrl = svgText
@@ -195,7 +197,8 @@ export default {
         console.log('viewSeatZone clicked', this.employee)
         this.$emit('view-seat-zone', this.employee)
       }
-    }
+    },
+    
   }
 }
 </script>

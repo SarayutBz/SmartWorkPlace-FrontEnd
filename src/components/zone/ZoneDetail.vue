@@ -134,12 +134,14 @@ export default {
       immediate: true,
       handler(newZone) {
         this.loadZoneSvg(newZone)
+        this.loadTablesData() // ✅ โหลดข้อมูลโต๊ะใหม่เมื่อเปลี่ยนโซน
       }
     },
     employeeCode() {
       this.searchEmployee()
     }
   },
+
 
   mounted() {
     this.loadTablesData()
@@ -307,4 +309,4 @@ export default {
 .v-list-item-subtitle {
   color: #666;
 }
-</style>
+</style>cd
