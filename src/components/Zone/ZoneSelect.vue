@@ -1,14 +1,14 @@
 <template>
     <v-app>
         <div class="flex">
-          
+
             <div class="box">
                 <NavBar />
 
                 <p class="text-center">
                     {{ SvgName }}
                 </p>
-               
+
 
                 <div id="svg-container" v-html="svgContent" @click="onZoneClick"
                     class="max-w-[150px] flex justify-center"></div>
@@ -31,12 +31,12 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="orange" text @click="dialog = false">
-                               แก้ไขที่นั่ง
+                                แก้ไขที่นั่ง
                             </v-btn>
                             <v-btn color="green darken-1" text @click="dialog = false">
                                 ปิด
                             </v-btn>
-                            
+
 
                         </v-card-actions>
                     </v-card>
@@ -76,9 +76,9 @@ export default {
     methods: {
         async loadSvgFromRoute(path) {
             const parts = path.split('/');
-            console.log("parts : ",parts)
+            console.log("parts : ", parts)
             const fileName = parts[parts.length - 1] + '.svg';
-            console.log("fileName : ",fileName)
+            console.log("fileName : ", fileName)
             this.SvgName = fileName;
 
             try {
@@ -136,7 +136,7 @@ export default {
 
                 try {
                     const allResponse = await this.getTable();
-                    const allTables = allResponse.data; 
+                    const allTables = allResponse.data;
                     const match = allTables.find(item => item.tableNumber === table);
                     this.tableData = match || null;
                     console.log('ข้อมูลโต๊ะที่คลิก:', this.tableData);
