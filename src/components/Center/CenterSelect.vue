@@ -1,96 +1,97 @@
 <template>
   <v-app>
-    <div class="flex">
-      <SideBar />
+   
+      <div class="d-flex">
+        <div class="flex-1 min-h-screen bg-gray-50 ">
+          <NavBar />
 
-      <div class="flex-1 min-h-screen bg-gray-50 p-4">
-        <NavBar />
+          <!-- แสดงชื่อ SVG -->
+          <h2 class="text-center text-xl font-semibold text-gray-700 my-4">
+            {{ SvgName }}
+          </h2>
 
-        <!-- แสดงชื่อ SVG -->
-        <h2 class="text-center text-xl font-semibold text-gray-700 my-4">
-          {{ SvgName }}
-        </h2>
+          <!-- แถว dropdown จังหวัด / ตึก / ชั้น -->
+          <v-row class="justify-center gap-4 mb-6">
+            <v-col cols="12" sm="3">
+              <v-select
+                :items="province"
+                label="จังหวัด"
+                outlined
+                v-model="selectedProvince"
+                @change="onProvinceSelect"
+              />
+            </v-col>
 
-        <!-- แถว dropdown จังหวัด / ตึก / ชั้น -->
-        <v-row class="justify-center gap-4 mb-6">
-          <v-col cols="12" sm="3">
-            <v-select
-              :items="province"
-              label="จังหวัด"
-              outlined
-              v-model="selectedProvince"
-              @change="onProvinceSelect"
-            />
-          </v-col>
+            <v-col cols="12" sm="3">
+              <v-select
+                :items="building"
+                label="ตึก"
+                outlined
+                v-model="selectedBuilding"
+                :disabled="!isBuildingEnabled || isBuildingLoading"
+                :loading="isBuildingLoading"
+                item-text="text"
+                item-value="value"
+                @change="onProvinceSelect2"
+              />
+            </v-col>
 
-          <v-col cols="12" sm="3">
-            <v-select
-              :items="building"
-              label="ตึก"
-              outlined
-              v-model="selectedBuilding"
-              :disabled="!isBuildingEnabled || isBuildingLoading"
-              :loading="isBuildingLoading"
-              item-text="text"
-              item-value="value"
-              @change="onProvinceSelect2"
-            />
-          </v-col>
+            <v-col cols="12" sm="3">
+              <v-select
+                :items="floor"
+                label="ชั้น"
+                outlined
+                v-model="selectedFloor"
+                :disabled="!isFloorEnabled || isFloorLoading"
+                :loading="isFloorLoading"
+                item-text="text"
+                item-value="value"
+              />
+            </v-col>
+          </v-row>
 
-          <v-col cols="12" sm="3">
-            <v-select
-              :items="floor"
-              label="ชั้น"
-              outlined
-              v-model="selectedFloor"
-              :disabled="!isFloorEnabled || isFloorLoading"
-              :loading="isFloorLoading"
-              item-text="text"
-              item-value="value"
-            />
-          </v-col>
-        </v-row>
+          <!-- ช่องค้นหา -->
+          <v-row justify="center" class="mb-6">
+            <v-col cols="12" sm="6">
+              <v-card class="p-4">
+                <v-text-field label="Search Employee ID" outlined dense />
+                <v-row justify="center" class="mt-2">
+                  <v-btn color="primary" tile>
+                    <v-icon left>fas fa-search</v-icon>
+                    Search
+                  </v-btn>
+                </v-row>
+              </v-card>
+            </v-col>
+          </v-row>
 
-        <!-- ช่องค้นหา -->
-        <v-row justify="center" class="mb-6">
-          <v-col cols="12" sm="6">
-            <v-card class="p-4">
-              <v-text-field label="Search Employee ID" outlined dense />
-              <v-row justify="center" class="mt-2">
-                <v-btn color="primary" tile>
-                  <v-icon left>fas fa-search</v-icon>
-                  Search
-                </v-btn>
-              </v-row>
-            </v-card>
-          </v-col>
-        </v-row>
+          <!-- แสดง SVG หรือแจ้งเตือน -->
+          <div class="flex justify-center">
+            <div v-if="isShowSvg" class="box-svg max-w-4xl p-4 bg-white rounded-lg shadow-md">
+              <div id="svg-container" v-html="svgContent" @click="onZoneClick"></div>
+            </div>
 
-        <!-- แสดง SVG หรือแจ้งเตือน -->
-        <div class="flex justify-center">
-          <div v-if="isShowSvg" class="box-svg max-w-4xl p-4 bg-white rounded-lg shadow-md">
-            <div id="svg-container" v-html="svgContent" @click="onZoneClick"></div>
+            <div v-else class="flex items-center justify-center h-64 bg-red-100 text-red-800 px-6 py-4 rounded-xl shadow-md">
+              <h1 class="text-lg font-semibold">กรุณาเลือกฟอร์มก่อน</h1>
+            </div>
           </div>
 
-          <div v-else class="flex items-center justify-center h-64 bg-red-100 text-red-800 px-6 py-4 rounded-xl shadow-md">
-            <h1 class="text-lg font-semibold">กรุณาเลือกฟอร์มก่อน</h1>
-          </div>
+          <!-- แสดงโซนที่เลือก -->
+          <p class="text-center mt-6 text-green-600 font-medium" v-if="selectedZone">
+            ✅ คุณเลือกโซน: <strong>{{ selectedZone }}</strong>
+          </p>
         </div>
-
-        <!-- แสดงโซนที่เลือก -->
-        <p class="text-center mt-6 text-green-600 font-medium" v-if="selectedZone">
-          ✅ คุณเลือกโซน: <strong>{{ selectedZone }}</strong>
-        </p>
       </div>
-    </div>
+   
   </v-app>
 </template>
+
 
 
 <script>
 import axios from 'axios'
 import NavBar from '../NavBar.vue'
-import SideBar from '../SideBar.vue'
+
 import router from '@/router'
 
 export default {
@@ -110,7 +111,7 @@ export default {
         svgContent: '', // เก็บเนื้อหา SVG
         selectedZone: '', // โซนที่ถูกคลิก
     }),
-    components: { NavBar, SideBar },
+    components: { NavBar,  },
     watch: {
         selectedBuilding() {
             this.updateSvgName()
@@ -191,6 +192,7 @@ export default {
         },
         onProvinceSelect2() {
             const buildingSlug = this.selectedBuilding
+            console.log("buildingSlug : ",buildingSlug)
             axios
                 .get(`http://localhost:3000/building/?floor=${buildingSlug}`)
                 .then((res) => {
@@ -222,6 +224,7 @@ export default {
 </script>
 
 <style>
+
 .box-svg {
   max-width: 750px;
   background: #fff;

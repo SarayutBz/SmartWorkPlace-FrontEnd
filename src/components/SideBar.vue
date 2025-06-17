@@ -7,7 +7,7 @@
 
     <router-link to="/dashboard">
       
-      <div class="sidebar-icon" :style="name === 'dashboard' ? { backgroundColor: 'rgba(0, 122, 204, 0.1)' } : {}">
+      <div class="sidebar-icon" :style="currentRouteName === 'dashboard' ? { backgroundColor: 'rgba(0, 122, 204, 0.1)' } : {}">
         <i class="fa-solid fa-chart-pie"></i>
       </div>
 
@@ -15,7 +15,7 @@
 
     <router-link to="/center">
       
-      <div class="sidebar-icon" :style="name === 'center' ? { backgroundColor: 'rgba(0, 122, 204, 0.1)' } : {}">
+      <div class="sidebar-icon" :style="currentRouteName === 'center' ? { backgroundColor: 'rgba(0, 122, 204, 0.1)' } : {}">
         <i class="fa-solid fa-map-location-dot"></i>
       </div>
 
@@ -86,7 +86,15 @@ export default {
       type: String,
       required: false,
     }
+  },
+ 
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    }
   }
+
+
 }
 
 </script>

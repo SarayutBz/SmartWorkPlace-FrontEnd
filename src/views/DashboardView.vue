@@ -2,7 +2,7 @@
 <template>
   <div class="app">
    
-    <SideBar :name="routeName" />
+    <!-- <SideBar :name="routeName" /> -->
     
     <div class="box-content ">
       <NavBar />
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
+// import SideBar from "@/components/SideBar";
 import NavBar from "@/components/NavBar";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
 import BarChart from "@/components/Dashboard/BarChart"
@@ -44,7 +44,7 @@ import LineChart from "@/components/Dashboard/LineChart.vue";
 export default {
   components: {
     StatsCard,
-    SideBar,
+    // SideBar,
     NavBar,
     BarChart,
     PieChart,

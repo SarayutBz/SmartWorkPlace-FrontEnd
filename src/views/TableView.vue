@@ -2,7 +2,7 @@
     
     <div class="flex">
     
-        <SideBar />
+       
         <div class="box">
             <NavBar />
 
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import SideBar from '@/components/SideBar.vue';
+
 import NavBar from '@/components/NavBar.vue';
 // import TableEmployees from '@/components/TableEmployees.vue';
 import TableEmployees from '@/components/Dashboard/TableEmployees.vue';
 export default {
     components: {
         TableEmployees,
-        SideBar,
+
         NavBar
     }
 }

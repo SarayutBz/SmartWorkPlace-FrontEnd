@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <div class="flex">
-            <SideBar />
+          
             <div class="box">
                 <NavBar />
 
@@ -49,7 +49,7 @@
 
 <script>
 import NavBar from '../NavBar.vue'
-import SideBar from '../SideBar.vue'
+
 import axios from 'axios'
 
 export default {
@@ -63,7 +63,7 @@ export default {
         clickedTable: null,
         tableData: null,
     }),
-    components: { NavBar, SideBar },
+    components: { NavBar, },
 
     watch: {
         '$route.path': {
@@ -103,7 +103,7 @@ export default {
         async applyTableColors() {
             try {
                 const allResponse = await this.getTable();
-                const allTables = allResponse[0].data;
+                const allTables = allResponse.data;
 
                 // เข้าถึง div svg-container ที่มี svg ภายใน
                 const svgContainer = this.$el.querySelector('#svg-container');
@@ -136,7 +136,7 @@ export default {
 
                 try {
                     const allResponse = await this.getTable();
-                    const allTables = allResponse[0].data; // <-- เข้าถึง array ข้างใน
+                    const allTables = allResponse.data; 
                     const match = allTables.find(item => item.tableNumber === table);
                     this.tableData = match || null;
                     console.log('ข้อมูลโต๊ะที่คลิก:', this.tableData);
@@ -151,7 +151,7 @@ export default {
 
         async getTable() {
             const res = await axios.get(`http://localhost:3000/seats/table/`);
-            return res.data; // จะได้ Array ตามที่แจ้ง
+            return res.data;
         }
     }
 
